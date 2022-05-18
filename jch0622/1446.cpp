@@ -2,12 +2,6 @@
 #include <map>
 #include <set>
 
-struct	NodeInfo
-{
-	int		start;
-	int		end;
-};
-
 struct	RoadInfo
 {
 	int		loadEnd_;
