@@ -15,10 +15,12 @@ using namespace std;
 class Highway
 {
 private:
+	Highway();
 	int highwayLen;
 	int numOfShortcut;
 
 public:
+	Highway(int len, int num) { setHighway(len, num);  };
 	int getHighwayLen();
 	int getNumOfShortcut();
 	void setHighway(int len, int num);
@@ -53,7 +55,6 @@ int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(0); cout.tie(0);
 
-	Highway highway;
 	int numShorcut, lenHighway;
 	int beforeDistance = -1; // i==0 일때 distance를 0으로 만들기 위해 초기값 설정
 
@@ -61,8 +62,8 @@ int main() {
 
 	vector<int> distance(lenHighway + 1, INT_MAX);
 	distance[lenHighway] = lenHighway;
-
-	highway.setHighway(lenHighway, numShorcut);
+	
+	Highway highway(lenHighway, numShorcut);
 
 	// 같은 위치의 출발/도착이면서 cost가 다른 경우가 있기 때문에 이중벡터 사용
 	vector<vector<Shortcut>> shortcutData(highway.getHighwayLen() + 1, vector<Shortcut>());
