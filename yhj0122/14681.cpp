@@ -31,13 +31,15 @@ class Helper
 private:
     pair<int, int> inputData;
 public:
-    int temInputX;
-    int temInputY;
     void setInputData();
     pair<int, int> getInputDate();
 };
 
 void Helper::setInputData(){ // 데이터 입력 형식이 변화할 경우 이곳 에서 대응하여 int pair 형태로 만 들 수 있음
+    
+    int temInputX;
+    int temInputY;
+    
     cin >> temInputX;
     cin >> temInputY;
     
