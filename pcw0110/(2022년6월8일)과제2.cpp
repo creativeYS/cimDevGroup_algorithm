@@ -13,9 +13,9 @@ private:
 
 public:
 	void initiate();
-	int ccw(Point xy1, Point xy2, Point xy3);
-	bool is_Crossed();
-	void print_XY();
+	int ccw(Point xy1, Point xy2, Point xy3) const;
+	bool is_Crossed() const;
+	void print_XY() const;
 };
 
 void Lines::initiate()
@@ -24,7 +24,7 @@ void Lines::initiate()
 		std::cin >> xy[i].x >> xy[i].y;
 }
 
-int Lines::ccw(Point xy1, Point xy2, Point xy3)
+int Lines::ccw(Point xy1, Point xy2, Point xy3) const
 {
 	
 	int z = (xy2.x - xy1.x)*(xy3.y - xy1.y) - (xy2.y - xy1.y)*(xy3.x - xy1.x);
@@ -37,7 +37,7 @@ int Lines::ccw(Point xy1, Point xy2, Point xy3)
 		return 0;
 }
 
-bool Lines::is_Crossed()
+bool Lines::is_Crossed() const
 {
 	if (ccw(xy[0], xy[1], xy[2]) * ccw(xy[0], xy[1], xy[3]) < 0)
 		return true;
@@ -45,7 +45,7 @@ bool Lines::is_Crossed()
 		return false;
 }
 
-void Lines::print_XY()
+void Lines::print_XY() const
 {
 	for(int i=0; i<2; i++)
 		std::cout << xy[i].x << " " << xy[i].y << std::endl;
