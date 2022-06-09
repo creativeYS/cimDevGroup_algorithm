@@ -3,11 +3,11 @@
 class Point
 {
 private:
-    double x;
-    double y;
+    const double x;
+    const double y;
+    Point();
 
 public:
-    Point();
     Point(const double & x, const double & y);
     Point(const Point & src);
     ~Point();
@@ -18,12 +18,10 @@ public:
     static double outerProduct(const Point & p1, const Point & p2);
     static bool isAcross(const Point & pa1, const Point & pa2, const Point & pb1, const Point & pb2);
 
-    Point & operator=(const Point & rhs);
     Point operator-(const Point & rhs) const;
 
 };
 
-Point::Point() : x(0), y(0) {};
 Point::Point(const double & x, const double & y) : x(x), y(y) {};
 Point::Point(const Point & src) : x(src.getX()), y(src.getY()) {}; 
 Point::~Point() {};
@@ -31,18 +29,12 @@ Point::~Point() {};
 double Point::getX() const { return this->x; };
 double Point::getY() const { return this->y; };
 
-Point & Point::operator=(const Point & rhs)
-{
-    this->x = rhs.getX();
-    this->y = rhs.getY();
-    return *this;
-}
+// function for algorithm
 Point Point::operator-(const Point & rhs) const
 {
     return Point(this->getX() - rhs.getX(), this->getY() - rhs.getY());
 }
 
-// function for algorithm
 double Point::outerProduct(const Point & p1, const Point & p2)
 {
     return p1.getX() * p2.getY() - p2.getX() * p1.getY();
@@ -60,13 +52,12 @@ bool Point::isAcross(const Point & pa1, const Point & pa2, const Point & pb1, co
 
 int main()
 {
-    Point point[4];
+    double x[4], y[4];
+
     for (int i = 0; i < 4; i++)
-    {
-        double x, y;
-        std::cin >> x >> y;
-        point[i] = Point(x, y);
-    }
+        std::cin >> x[i] >> y[i];
+        
+    Point point[4] = { {x[0], y[0]}, {x[1], y[1]}, {x[2], y[2]}, {x[3], y[3]} };
 
     std::cout << Point::isAcross(point[0], point[1], point[2], point[3]);
 }

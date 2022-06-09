@@ -1,15 +1,16 @@
 #pragma once
+
 #include <vector>
 #include <algorithm>
 
 class StackCube
 {
     typedef std::vector<std::vector<int> > cubeInfo;
-    
+
 private:
-    int depth;
-    int width;
-    cubeInfo map;
+    const int depth;
+    const int width;
+    const cubeInfo map;
 
     StackCube();
 
@@ -25,11 +26,8 @@ public:
     ~StackCube();
 
     int allSurfaceArea() const;
-
-    StackCube & operator=(const StackCube & rhs);
 };
 
-StackCube::StackCube() : depth(0), width(0), map(0, std::vector<int>(0, 0)) {};
 StackCube::StackCube(const int & depth, const int & width, const cubeInfo & map) : depth(depth), width(width), map(map) {};
 StackCube::StackCube(const StackCube & src) : depth(src.getDepth()), width(src.getWidth()), map(src.getMap()) {};
 StackCube::~StackCube() {};
@@ -37,14 +35,6 @@ StackCube::~StackCube() {};
 int StackCube::getDepth() const { return this->depth; };
 int StackCube::getWidth() const { return this->width; };
 std::vector<std::vector<int> > StackCube::getMap() const { return this->map; };
-
-StackCube & StackCube::operator=(const StackCube & rhs)
-{
-    this->depth = rhs.getDepth();
-    this->width = rhs.getWidth();
-    this->map = rhs.getMap();
-    return *this;
-}
 
 // function for algorithm
 int StackCube::eachSurfaceArea(const int & curDepth, const int & curWidth) const
