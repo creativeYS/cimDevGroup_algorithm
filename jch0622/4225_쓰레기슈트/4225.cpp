@@ -5,7 +5,7 @@
 #include <iomanip>
 
 #define PI acos(-1)
-#define EPSILON 0.00001
+#define EPSILON 0.0001
 
 enum Ccw { CW, CCW, PARALLEL};
 
@@ -230,63 +230,6 @@ public:
     }
 };
 
-void testAcos()
-{
-    std::cout << acos(0.5) * 180 / 3.14 << std::endl;
-    std::cout << 180 / acos(-1) << std::endl;
-    std::cout << acos(0.5) * 180 / acos(-1) << std::endl;
-}
-
-void testPoint()
-{
-    {
-        Point2 p0(0, 0);
-        Point2 p1(0, 5);
-        Point2 p2(5, 0);
-        std::cout << p0.findAngle(p1, p2) << std::endl;
-        std::cout << p0.ccw(p1, p2) << std::endl;
-        std::cout << p0.lineToPointDistance(p1, p2) << "\n" << std::endl;
-    }
-    {
-        Point2 p0(0, 0);
-        Point2 p1(0, 40);
-        Point2 p2(30, 0);
-        std::cout << p0.findAngle(p1, p2) << std::endl;
-        std::cout << p0.ccw(p1, p2) << std::endl;
-        std::cout << p0.lineToPointDistance(p1, p2) << "\n" << std::endl;
-    }
-    {
-        Point2 p0(0, 0);
-        Point2 p1(0, 5);
-        Point2 p2(0, -5);
-        std::cout << p0.findAngle(p1, p2) << std::endl;
-        std::cout << p0.ccw(p1, p2) << std::endl;
-        std::cout << p0.lineToPointDistance(p1, p2) << "\n" << std::endl;
-    }
-    {
-        Point2 p0(0, 0);
-        Point2 p1(0, 5);
-        Point2 p2(0, 50);
-        std::cout << p0.findAngle(p1, p2) << std::endl;
-        std::cout << p0.ccw(p1, p2) << std::endl;
-        std::cout << p0.lineToPointDistance(p1, p2) << "\n" << std::endl;
-    }
-}
-
-void testConvecPoint()
-{
-    std::vector<Point2> node;
-    node.push_back(Point2(0,0));
-    node.push_back(Point2(0,10));
-    node.push_back(Point2(10,10));
-    node.push_back(Point2(5,5));
-    node.push_back(Point2(10,0));    
-
-    Polygon poly(5, node);
-    for (int i = 0 ; i < 5; i++)
-        std::cout << poly.findConvexPoint(i) << " "; 
-}
-
 int main()
 {
     std::vector<double> answer;
@@ -304,8 +247,7 @@ int main()
             node[i] = Point2(x, y);
         }
         Polygon polygon(numberOfSide, node);
-        //emplace_back 학습필요
-        answer.emplace_back(polygon.polygonMinWidth());
+        answer.push_back(polygon.polygonMinWidth());
         std::cin >> numberOfSide;
     }
 
@@ -318,8 +260,6 @@ int main()
         else
             std::cout << "Case " << i+1 << ": " << answer[i] << std::endl;
     }
-    // testPoint();
-    // testConvecPoint();
 }
 
 // 벡터 각도 구하기
@@ -327,3 +267,49 @@ int main()
 // 외적 이용해서 왼쪽 오른쪽 방향 파악
 // 두 벡터의 각도가 180 초과 -> 오목다각형 부분이라 판별하지 않음
 // noexcept 이용해서 복사생성자 안만드는거도 참고해볼 필요가 있을듯
+
+/* 
+3
+0 0
+3 0
+0 4
+3
+0 0
+0 4
+3 0
+4
+0 10
+10 0
+20 10
+10 20
+4
+10 20
+20 10
+10 0
+0 10
+5
+0 0
+-1 10
+11 12
+5 5
+10 -1
+5
+5 5
+10 -1
+0 0
+-1 10
+11 12
+0
+
+9
+1 2
+2 6
+3 9
+5 10
+11 10
+9 3
+7 6
+5 -1
+0 0
+0
+*/
