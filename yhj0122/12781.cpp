@@ -49,7 +49,9 @@ void Solver::crossCheck() {
 }
 
 int Solver::CCW(Point p1, Point p2, Point p3) const{
-	int ccwRes = (p2.getPoint().first - p1.getPoint().first)*(p3.getPoint().second - p1.getPoint().second) - (p2.getPoint().second - p1.getPoint().second)*(p3.getPoint().first - p1.getPoint().first);
+	int ccwRes = 
+		(p2.getPoint().first - p1.getPoint().first)*(p3.getPoint().second - p1.getPoint().second)
+		- (p2.getPoint().second - p1.getPoint().second)*(p3.getPoint().first - p1.getPoint().first);
 	if (ccwRes > 0) return 1;
 	else if (ccwRes < 0) return -1;
 	else return 0;
