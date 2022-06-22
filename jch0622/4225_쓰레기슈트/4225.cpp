@@ -154,7 +154,6 @@ public:
 		std::pair<int, int> index = this->findFirstConvexPoint();
 		int startIndex = index.first;
 		int nextIndex = index.second;
-		// std::cout << "<" << startIndex << " " << nextIndex << ":" << polygonWidth(startIndex, nextIndex) << ">\n";
 
 		// 첫 시작만 반복문 밖에서
 		double minWidth = this->polygonWidth(startIndex, nextIndex);
@@ -164,7 +163,6 @@ public:
 		{
 			nextIndex = this->findConvexPoint(curIndex);
 			minWidth = std::min(polygonWidth(curIndex, nextIndex), minWidth);
-			// std::cout << "<" << startIndex << " " << curIndex << " " << nextIndex << ":" << polygonWidth(curIndex, nextIndex) << ">\n";
 			curIndex = nextIndex;
 		}
 		return minWidth;
@@ -227,9 +225,6 @@ public:
 				idxVec[ccwValue] = i;
 			}
 		}
-		// std::cout << "[" << angleVec[CW] << " " << angleVec[CCW] << " " << angleVec[EQUAL] << " " << angleVec[OPPOSITE] << "]\n";
-		// std::cout << "[" << idxVec[CW] << " " << idxVec[CCW] << " " << idxVec[EQUAL] << " " << idxVec[OPPOSITE] << "]\n";
-
 		if (idxVec[OPPOSITE] >= 0 || angleVec[CW] + angleVec[CCW] > PI + EPSILON)
 			return -1;
 		else if (idxVec[CW] >= 0)
@@ -262,15 +257,9 @@ int main()
 
 	for (int i = 0; i < answer.size(); i++)
 	{
-		// std::cout.precision(20);
-		// std::cout << "Case " << i+1 << ": " << answer[i] << std::endl;
 		std::cout.precision(2);
 		std::cout.setf(std::ios::fixed);
 		std::cout << "Case " << i + 1 << ": " << ceil((answer[i] - EPSILON) * 100) / 100 << std::endl;
-		// if (answer[i]*100 - static_cast<int>(answer[i]*100) > 0.1)
-		//     std::cout << "Case " << i+1 << ": " << ceil(answer[i]*100)/100 << std::endl;
-		// else
-		//     std::cout << "Case " << i+1 << ": " << answer[i] << std::endl;
 	}
 }
 
@@ -279,16 +268,3 @@ int main()
 // 외적 이용해서 왼쪽 오른쪽 방향 파악
 // 두 벡터의 각도가 180 초과 -> 오목다각형 부분이라 판별하지 않음
 // noexcept 이용해서 복사생성자 안만드는거도 참고해볼 필요가 있을듯
-
-/*
-4
-0 0
-1 0
-10000 1
-9999 1
-0
-
-output : 0.01
-myoutput : 0.00
-
-*/
